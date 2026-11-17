@@ -36,12 +36,24 @@ export async function request(path, options = {}) {
 
         return data;
 
-    } catch (error) {
+        } catch (error) {
         if (error.name === "AbortError") {
             throw {
                 type: "timeout",
                 status: null,
                 message: "Request timed out after 8 seconds"
+            };
+        }
+
+        if (error.type === "http") {
+            throw error;
+        }
+
+        if (error instanceof SyntaxError) {
+            throw {
+                type: "parse",
+                status: null,
+                message: "Failed to parse server response"
             };
         }
 
@@ -52,24 +64,13 @@ export async function request(path, options = {}) {
                 message: "No internet connection"
             };
         }
-        if (error instanceof SyntaxError) {
-    throw {
-        type: "parse",
-        status: null,
-        message: "Failed to parse server response"
-    };
-}
-if (error.type === "http") {
-    throw error;
-}
 
         throw {
-    type: "network",
-    status: null,
-    message: "Network request failed"
-};
-
-    } finally {
+            type: "network",
+            status: null,
+            message: "Network request failed"
+        };
+        } finally {
         clearTimeout(timeoutId);
     }
 }

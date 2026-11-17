@@ -4,12 +4,11 @@ const catalogueContainer = document.getElementById("catalogue-container");
 
 async function loadArticles() {
     try {
-        const articles = await request("/articles");
-
+const articles = await request("/articles");
         console.log(articles);
 
     } catch (error) {
         console.error(error);
     }
-}      
+}  
 loadArticles();
