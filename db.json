@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "Bague en or 18 carats",
+      "description": "Bague en or jaune 18 carats avec finition polie.",
+      "price": 1250,
+      "status": "available",
+      "date": "2026-11-17"
+    },
+    {
+      "id": "2",
+      "title": "Bracelet en argent",
+      "description": "Bracelet en argent 925 avec un design elegant.",
+      "price": 450,
+      "status": "reserved",
+      "date": "2026-11-16"
+    },
+    {
+      "id": "3",
+      "title": "Piece en or",
+      "description": "Piece en or destinee aux collectionneurs.",
+      "price": 3200,
+      "status": "sold",
+      "date": "2026-11-15"
+    }
+  ]
+}
