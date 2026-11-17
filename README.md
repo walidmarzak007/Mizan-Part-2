@@ -1,73 +1,80 @@
-# Mizan — Gold & Silver Price Dashboard
+# Mizan — Part II: Catalogue Management
 
-Mizan is a web application developed for **Bijouterie Al Andalous**, a jewellery shop in Nador, Morocco.
+Mizan Part II is a web application developed for **Bijouterie Al Andalous**, a jewellery shop in Nador, Morocco.
 
-Its purpose is to display current gold and silver prices in MAD per gram and help shop staff follow market prices.
+Its purpose is to provide a back-office interface for managing jewellery catalogue items and customer reservations using an external REST API simulated with JSON Server.
 
 ## Technologies
 
 - HTML
 - CSS
-- JavaScript
+- JavaScript (ES6 Modules)
 - Fetch API
+- JSON Server
 - LocalStorage
 
 ## API
 
-Mizan currently uses the Xaus API:
+The project uses **JSON Server** to simulate a REST API.
 
-`https://xaus.com/api/v1/spot?currency=MAD&unit=gram&compact=1`
-
-It provides gold and silver prices, exchange rates, and update timestamps.
-
-## Project Structure
-
-```text
-mizan/
-├── index.html
-├── css/
-│   └── style.css
-└── js/
-    ├── main.js
-    ├── api.js
-    ├── calculator.js
-    ├── charts.js
-    ├── storage.js
-    └── ui.js
-```
+- Base URL: `http://localhost:3000`
+- Main endpoint: `/articles`
+- Data is stored in `db.json`.
 
 ## Implemented Features
 
-- Fetch gold and silver prices from the API.
-- Convert silver prices from USD per ounce to price per gram.
-- Display prices in dynamically generated cards.
-- Show the last update date and time.
-- Calculate price differences and percentage changes.
-- Display price variations with green, red, and neutral indicators.
-- Save daily reference prices using LocalStorage.
-- Allow currency selection (MAD, USD, EUR).
-- Save the selected currency in LocalStorage.
-- Display historical price charts for gold and silver.
-- Select historical periods (7 days or 30 days).
-- Handle API errors using try/catch.
+- Set up JSON Server with sample jewellery articles.
+- Create a centralized API client using a reusable `request()` function.
+- Send HTTP requests using Fetch API.
+- Set JSON request headers.
+- Handle HTTP response errors.
+- Implement an 8-second request timeout using AbortController.
+- Normalize errors into five categories: HTTP, network, offline, timeout, and JSON parsing.
+- Test successful GET requests and API error handling.
 
 ## Upcoming Features
 
-- Build a jewellery price estimator.
-- Improve loading and error messages.
-- Add request logging.
+- Display and retrieve catalogue articles.
+- Search, filter, and sort articles.
+- Create, edit, and delete catalogue items.
+- Implement loading, success, and error states.
+- Cache API data for offline access.
+- Save user preferences using LocalStorage.
+- Add a network monitoring panel.
 
 ## Technical Choices
 
 - Vanilla JavaScript without frameworks.
-- ES modules to organize the code.
-- Separate API, calculation, storage, chart, and UI logic.
-- Use textContent to safely display API data.
-- Use LocalStorage to save daily reference prices and currency preferences.
-- Generate historical charts dynamically without external chart libraries.
+- ES modules to organize the application.
+- A centralized API client for all network requests.
+- JSON Server as a simulated REST API.
+- AbortController to prevent requests from taking too long.
+- textContent to safely display external data.
+- Versioned LocalStorage keys for cached data and preferences.
+
+## Running the Project
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the JSON Server:
+
+```bash
+npx json-server --watch db.json --port 3000
+```
+
+The API will be available at:
+
+`http://localhost:3000/articles`
+
+Open `index.html` using Live Server.
 
 ---
 
-**Project:** Mizan  
+**Project:** Mizan — Part II  
+**Client:** Bijouterie Al Andalous  
 **Interface language:** French  
-**Project type:** Front-end web application
+**Project type:** Front-end web application connected to a simulated REST API
