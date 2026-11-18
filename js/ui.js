@@ -1,50 +1,38 @@
+const catalogueContainer = document.getElementById("catalogue-container");
 
-const pricesContainer = document.getElementById("prices-container");
+export function renderArticles(articles) {
+    catalogueContainer.textContent = "";
 
-export function renderPriceCards(metals, formattedDate) {
-    pricesContainer.textContent = "";
-
-    metals.forEach((metal) => {
-        const card = document.createElement("section");
-        card.classList.add("price-card");
+    articles.forEach((article) => {
+        const card = document.createElement("article");
+        card.classList.add("article-card");
 
         const title = document.createElement("h2");
-        title.textContent = metal.name;
+        title.textContent = article.title;
         card.append(title);
 
+        const description = document.createElement("p");
+        description.textContent = article.description;
+        card.append(description);
+
         const price = document.createElement("p");
-        price.classList.add("price-value");
-        price.textContent = `${metal.price.toFixed(2)} ${metal.currency}`;
+        price.textContent = `${article.price} MAD`;
         card.append(price);
 
-        const variationText = document.createElement("p");
-
-        if (metal.variation) {
-            if (metal.variation.difference > 0) {
-                variationText.classList.add("variation-up");
-                variationText.textContent =
-                    `↑ +${metal.variation.difference.toFixed(4)} ${metal.currency} (+${metal.variation.percentage.toFixed(2)}%)`;
-
-            } else if (metal.variation.difference < 0) {
-                variationText.classList.add("variation-down");
-                variationText.textContent =
-                    `↓ ${metal.variation.difference.toFixed(4)} ${metal.currency} (${metal.variation.percentage.toFixed(2)}%)`;
-
-            } else {
-                variationText.classList.add("variation-neutral");
-                variationText.textContent =
-                    `→ 0.00 ${metal.currency} (0.00%)`;
-            }
-        } else {
-            variationText.textContent = "Variation indisponible";
-        }
-
-        card.append(variationText);
+        const status = document.createElement("p");
+        status.textContent = article.status;
+        card.append(status);
 
         const date = document.createElement("p");
-        date.textContent = `Dernière mise à jour : ${formattedDate}`;
+        date.textContent = article.date;
         card.append(date);
 
-        pricesContainer.append(card);
-    });
-}
+        catalogueContainer.append(card);
+
+        const detailsButton = document.createElement("button");
+        detailsButton.textContent = "Voir les détails";
+        detailsButton.classList.add("details-button");
+        detailsButton.dataset.articleId = article.id;
+
+        card.append(detailsButton);
+});}

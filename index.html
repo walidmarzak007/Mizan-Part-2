@@ -9,42 +9,43 @@
     <body>
         <header>
             <h1>Mizan</h1>
-            <p>Suivez les prix de l'or et de l'argent en temps réel</p>
+            <p>Gestion du catalogue de la bijouterie Al Andalous</p>
         </header>
         <main>
 
-            <select id = "currency-select"> 
-                <option value="MAD">MAD</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
+            <input type="text" id="search-input" placeholder="Rechercher un article...">
+
+            <select id="status-filter">
+            <option value="">Tous les statuts</option>
+            <option value="available">Disponible</option>
+            <option value="reserved">Réservé</option>
+            <option value="sold">Vendu</option>
             </select>
 
-            <section class="prices-container" id="prices-container">
-            <p>Chargement des prix...</p>
+            <select id="sort-select">
+            <option value="">Trier par...</option>
+            <option value="title">Titre</option>
+            <option value="price">Prix</option>
+            <option value="date">Date</option>
+            </select>
+
+
+            <section class="catalogue-container" id="catalogue-container">
+            <p>Chargement du catalogue...</p>
              </section>
 
-             <section class="history-section">
-    <h2>Historique des prix</h2>
+             <dialog id="article-details-dialog">
+            <h2>Détails de l'article</h2>
 
-    <label for="metal-select">Choisir un métal :</label>
-    <select id="metal-select">
-        <option value="xau">Or</option>
-        <option value="silver">Argent</option>
-    </select>
+            <div id="article-details-content"></div>
 
-    <label for="history-period">Période :</label>
-    <select id="history-period">
-        <option value="7d">7 jours</option>
-        <option value="1mo">30 jours</option>
-    </select>
-
-            <div id="history-chart">
-            <p>Choisissez un métal et une période.</p>
-            </div>
-            </section>
+            <button type="button" id="close-details-button">
+                               Fermer
+             </button>
+             </dialog>
             
-            <button id="refresh-button">Actualiser les prix</button>
-            <p id="status-message">Prêt</p>
+            <button id="refresh-button">Rafraîchir le catalogue</button>
+            <p id="status-message">Catalogue Prêt</p>
         </main>
 
         <footer>© 2026 Mizan - Tous droits réservés</footer>
